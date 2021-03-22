@@ -20,6 +20,11 @@ declare global {
     return
   }
 
+  const visitedClasses = new Set()
+  const pendingClasses = new Set()
+  const visitedTags = new Set()
+  const pendingTags = new Set()
+
   const {
     extractInitial = true,
     preflight = true,
@@ -48,11 +53,6 @@ declare global {
       'background:#0ea5e9; color:white; padding: 1px 4px; border-radius: 3px;',
       '',
     )
-
-    const visitedClasses = new Set()
-    const pendingClasses = new Set()
-    const visitedTags = new Set()
-    const pendingTags = new Set()
 
     let _timer: number | undefined
 
@@ -149,5 +149,8 @@ declare global {
 
     if (extractInitial)
       extractAll()
+
+    if (timing === 'immediate' && extractInitial)
+      window.addEventListener('load', extractAll)
   }
 })()

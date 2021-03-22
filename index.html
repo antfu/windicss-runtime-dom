@@ -4,14 +4,29 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Windi CSS Runtime DOM</title>
+  <script src="./dist/index.global.js"></script>
 </head>
 <body>
   <div class="p-4">
-    <div class="p-4 rounded shadow-xl text-light-blue-700">
-      Hello
+    <div class="px-8 py-1 rounded-xl hover:shadow-xl text-light-blue-700 transition-all duration-300">
+      <p>
+        This is an example of
+        <a href="https://github.com/windicss/windicss" target="_blank" class="text-light-blue-500">
+          Windi CSS
+        </a>
+        running on the 
+        <a href="https://github.com/antfu/windicss-runtime-dom" target="_blank" class="text-light-blue-500">
+          client side
+        </a>
+      </p>
+      <p>
+        It enables with only one line of code and no build tools / server required.
+      </p>
+      <p class="font-serif rounded px-4 py-2 -mx-4 bg-light-blue-400 bg-opacity-10">
+        Open up DevTools, and play with it!
+      </p>
     </div>
   </div>
-  <script src="./dist/index.global.js"></script>
 </body>
 </html>

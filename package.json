@@ -1,0 +1,42 @@
+{
+  "name": "windicss-runtime-dom",
+  "version": "0.0.1",
+  "description": "Enables Windi CSS for any site with one-line code without any build tools - Windi CSS on the browser runtime",
+  "browser": "dist/index.global.js",
+  "unpkg": "dist/index.global.js",
+  "jsdelivr": "dist/index.global.js",
+  "funding": "https://github.com/sponsors/antfu",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antfu/windicss-runtime-dom/issues"
+  },
+  "homepage": "https://github.com/antfu/windicss-runtime-dom#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/windicss-runtime-dom.git"
+  },
+  "keywords": [
+    "windicss"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "dev": "npm run build -- --watch",
+    "build": "tsup src/index.ts --format iife --dts",
+    "release": "bumpp --commit --push --tag"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.6.2",
+    "@antfu/ni": "^0.5.5",
+    "@types/node": "^14.14.35",
+    "bumpp": "^6.0.6",
+    "eslint": "^7.22.0",
+    "esno": "^0.5.0",
+    "tsup": "^4.8.19",
+    "typescript": "^4.2.3",
+    "windicss": "^2.5.4"
+  }
+}

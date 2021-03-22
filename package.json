@@ -25,7 +25,7 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "dev": "npm run build -- --watch",
-    "build": "tsup src/index.ts --format iife --dts",
+    "build": "tsup src/index.ts --format iife --dts --minify",
     "release": "bumpp --commit --push --tag"
   },
   "devDependencies": {

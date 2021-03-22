@@ -2,9 +2,10 @@
   "name": "windicss-runtime-dom",
   "version": "0.0.1",
   "description": "Enables Windi CSS for any site with one-line code without any build tools - Windi CSS on the browser runtime",
-  "browser": "dist/index.global.js",
-  "unpkg": "dist/index.global.js",
-  "jsdelivr": "dist/index.global.js",
+  "browser": "dist/index.min.js",
+  "unpkg": "dist/index.min.js",
+  "jsdelivr": "dist/index.min.js",
+  "type": "dist/index.d.ts",
   "funding": "https://github.com/sponsors/antfu",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -25,17 +26,21 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "dev": "npm run build -- --watch",
-    "build": "tsup src/index.ts --format iife --dts --minify",
+    "build": "rollup -c",
     "release": "bumpp --commit --push --tag"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.6.2",
     "@antfu/ni": "^0.5.5",
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.0",
     "@types/node": "^14.14.35",
     "bumpp": "^6.0.6",
     "eslint": "^7.22.0",
-    "esno": "^0.5.0",
-    "tsup": "^4.8.19",
+    "rollup": "^2.42.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "tslib": "^2.1.0",
     "typescript": "^4.2.3",
     "windicss": "^2.5.4"
   }

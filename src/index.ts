@@ -14,27 +14,53 @@ declare global {
   }
 }
 
+const visitedClasses = new Set()
+const pendingClasses = new Set()
+const visitedTags = new Set()
+const pendingTags = new Set()
+
+function include<T>(set: Set<T>, v: T[] | Set<T>) {
+  for (const i of v)
+    set.add(i)
+}
+
+const {
+  extractInitial = true,
+  preflight = true,
+  timing = 'immediate',
+  config = {},
+} = window.windicssRuntimeOptions || {}
+
+function addClasses(classes: string[]) {
+  let changed = false
+  classes.forEach((i) => {
+    if (!visitedClasses.has(i)) {
+      pendingClasses.add(i)
+      changed = true
+    }
+  })
+  return changed
+}
+
+function addTags(tags: string[]) {
+  let changed = false
+  tags.forEach((i) => {
+    if (!visitedTags.has(i)) {
+      pendingTags.add(i)
+      changed = true
+    }
+  })
+  return changed
+}
+
 (() => {
   if (typeof window === 'undefined') {
     console.warn('[windicss-runtime-dom] this package does not work for non-browser environment')
     return
   }
 
-  const visitedClasses = new Set()
-  const pendingClasses = new Set()
-  const visitedTags = new Set()
-  const pendingTags = new Set()
-
-  const {
-    extractInitial = true,
-    preflight = true,
-    timing = 'immediate',
-    config = {},
-  } = window.windicssRuntimeOptions || {}
-
   if (timing === 'loaded')
     window.addEventListener('load', init)
-
   else
     init()
 
@@ -55,11 +81,6 @@ declare global {
     )
 
     let _timer: number | undefined
-
-    function include<T>(set: Set<T>, v: T[] | Set<T>) {
-      for (const i of v)
-        set.add(i)
-    }
 
     function scheduleUpdate() {
       if (_timer != null)
@@ -92,28 +113,6 @@ declare global {
       style.sort()
 
       styleElement!.innerHTML = style.build()
-    }
-
-    function addClasses(classes: string[]) {
-      let changed = false
-      classes.forEach((i) => {
-        if (!visitedClasses.has(i)) {
-          pendingClasses.add(i)
-          changed = true
-        }
-      })
-      return changed
-    }
-
-    function addTags(tags: string[]) {
-      let changed = false
-      tags.forEach((i) => {
-        if (!visitedTags.has(i)) {
-          pendingTags.add(i)
-          changed = true
-        }
-      })
-      return changed
     }
 
     function extractAll() {

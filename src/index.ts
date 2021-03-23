@@ -124,17 +124,20 @@ function addTags(tags: string[]) {
     }
 
     function mockClasses() {
-      const completions = generateCompletions(processor)
-      const comment = '/* Windi CSS mock class names for devtools auto-completion */\n'
-      const css = [
-        ...completions.color,
-        ...completions.static,
-      ].map(toClass).join('')
+      if (!document.getElementById("windicss-devtools-completions")) {
+        const completions = generateCompletions(processor)
+        const comment = '/* Windi CSS mock class names for devtools auto-completion */\n'
+        const css = [
+          ...completions.color,
+          ...completions.static,
+        ].map(toClass).join('')
 
-      const style = document.createElement('style')
-      style.setAttribute('type', 'text/css')
-      style.innerHTML = comment + css
-      document.head.prepend(style)
+        const style = document.createElement('style')
+        style.setAttribute('type', 'text/css')
+        style.id = "windicss-devtools-completions";
+        style.innerHTML = comment + css
+        document.head.prepend(style)
+      }
     }
 
     function extractAll() {

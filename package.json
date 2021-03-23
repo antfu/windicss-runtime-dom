@@ -1,6 +1,6 @@
 {
   "name": "windicss-runtime-dom",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Enables Windi CSS for any site with one-line code without any build tools - Windi CSS on the browser runtime",
   "browser": "dist/index.min.js",
   "unpkg": "dist/index.min.js",

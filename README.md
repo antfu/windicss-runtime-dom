@@ -20,7 +20,8 @@ Idea credit to [@alexanderniebuhr](https://github.com/alexanderniebuhr) 🙌
 <script>
 window.windicssRuntimeOptions = {
   preflight: true,
-  extractInitial: true
+  extractInitial: true,
+  mockClasses: false
 }
 </script>
 <script src="https://unpkg.com/windicss-runtime-dom"></script>

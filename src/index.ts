@@ -1,5 +1,6 @@
 import { Config } from 'windicss/types/interfaces'
 import { StyleSheet } from 'windicss/utils/style'
+import { generateCompletions } from 'windicss/utils'
 import Processor from 'windicss'
 
 declare global {
@@ -7,6 +8,7 @@ declare global {
     windicssRuntimeOptions?: {
       timing?: 'immediate' | 'loaded'
       preflight?: boolean
+      mockClasses?: boolean
       extractInitial?: boolean
       styleElement?: HTMLStyleElement
       config?: Config
@@ -27,6 +29,7 @@ function include<T>(set: Set<T>, v: T[] | Set<T>) {
 const {
   extractInitial = true,
   preflight = true,
+  mockClasses: enabledMockClasses = false,
   timing = 'immediate',
   config = {},
 } = window.windicssRuntimeOptions || {}
@@ -115,6 +118,25 @@ function addTags(tags: string[]) {
       styleElement!.innerHTML = style.build()
     }
 
+    function toClass(name: string) {
+      // css escape
+      return `.${processor.e(name)}{}`
+    }
+
+    function mockClasses() {
+      const completions = generateCompletions(processor)
+      const comment = '/* Windi CSS mock class names for devtools auto-completion */\n'
+      const css = [
+        ...completions.color,
+        ...completions.static,
+      ].map(toClass).join('')
+
+      const style = document.createElement('style')
+      style.setAttribute('type', 'text/css')
+      style.innerHTML = comment + css
+      document.head.prepend(style)
+    }
+
     function extractAll() {
       document.querySelectorAll('*').forEach((i) => {
         addClasses(Array.from<string>(i?.classList || []))
@@ -151,5 +173,8 @@ function addTags(tags: string[]) {
 
     if (timing === 'immediate' && extractInitial)
       window.addEventListener('load', extractAll)
+
+    if (enabledMockClasses)
+      mockClasses()
   }
 })()

@@ -10,9 +10,23 @@ Enables [Windi CSS](https://github.com/windicss/windicss) for **any site** with 
 <script src="https://unpkg.com/windicss-runtime-dom"></script>
 ```
 
-> TODO: add more docs
+And start playing!
 
 Idea credit to [@alexanderniebuhr](https://github.com/alexanderniebuhr) 🙌
+
+## Configurations
+
+```js
+<script>
+window.windicssRuntimeOptions = {
+  preflight: true,
+  extractInitial: true
+}
+</script>
+<script src="https://unpkg.com/windicss-runtime-dom"></script>
+```
+
+Refer to [`src/index.ts`](./src/index.ts) for more details.
 
 ## Sponsors
 

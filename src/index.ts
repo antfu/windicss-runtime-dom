@@ -13,6 +13,7 @@ declare global {
       styleElement?: HTMLStyleElement
       config?: Config
     }
+    __windicssRuntimeInitialized?: boolean
   }
 }
 
@@ -61,6 +62,10 @@ function addTags(tags: string[]) {
     console.warn('[windicss-runtime-dom] this package does not work for non-browser environment')
     return
   }
+  if (window.__windicssRuntimeInitialized)
+    return
+
+  window.__windicssRuntimeInitialized = true
 
   if (timing === 'loaded')
     window.addEventListener('load', init)

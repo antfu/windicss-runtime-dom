@@ -20,7 +20,7 @@ Idea credit to [@alexanderniebuhr](https://github.com/alexanderniebuhr) 🙌
 To prevent FOUC (flash of unstyled content), you can update the following line to your `<body>` tag.
 
 ```html
-<body class="!block" style="display: none">
+<body class="block" hidden>
 ```
 
 ## Configurations
